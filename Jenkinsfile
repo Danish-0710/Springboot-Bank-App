@@ -3,28 +3,32 @@
 pipeline {
     agent {label 'dev-server'}
 
-    stages {
-        stage('Checkout code') {
-            steps {
-                codeCheckout('DevOps', 'https://github.com/Danish-0710/Springboot-Bank-App.git')
+        stages{
+        stage("Code clone"){
+            steps{
+                sh "whoami"
+            clone("https://github.com/LondheShubham153/django-notes-app.git","main")
             }
         }
-        stage('build') {
-            steps {
-                buildImage("springboot-application")
+        stage("Code Build"){
+            steps{
+            dockerbuild("notes-app","latest")
             }
         }
-        stage('Push Image') {
-            steps {
-                pushImage("springboot-application")
+        stage("Push to DockerHub"){
+            steps{
+                dockerpush("dockerHubCreds","notes-app","latest")
             }
         }
-        stage('Deploy'){
+        stage("Deploy"){
             steps{
                 deploy()
             }
         }
         
     }
+
+
+
 }
 
