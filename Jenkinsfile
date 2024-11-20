@@ -7,28 +7,19 @@ pipeline {
         stage("Code clone"){
             steps{
                 sh "whoami"
-            clone("https://github.com/LondheShubham153/django-notes-app.git","main")
+            clone("https://github.com/Danish-0710/Springboot-Bank-App.git","DevOps")
             }
         }
         stage("Code Build"){
             steps{
-            dockerbuild("notes-app","latest")
+            dockerbuild("springboot-app","latest")
             }
         }
         stage("Push to DockerHub"){
             steps{
-                dockerpush("dockerHubCreds","notes-app","latest")
+                dockerpush("dockerHubCreds","springboot-app","latest")
             }
-        }
-        stage("Deploy"){
-            steps{
-                deploy()
-            }
-        }
-        
+        }   
     }
-
-
-
 }
 
