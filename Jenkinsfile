@@ -6,7 +6,7 @@ pipeline{
         stage("Code clone"){
             steps{
                 sh "whoami"
-            clone("https://github.com/Danish-0710/Springboot-Bank-App.git","DevOps")
+            clone("https://github.com/Danish-0710/Springboot-Bank-App.git","prod")
             }
         }
         stage("Code Build"){
