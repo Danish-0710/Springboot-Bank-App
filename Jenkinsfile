@@ -1,12 +1,12 @@
 @Library("shared-library@DevOps") _
 
 pipeline {
-    agent {label 'runner_1'}
+    agent {label 'dev-server'}
 
     stages {
         stage('Checkout code') {
             steps {
-                codeCheckout('DevOps', 'https://github.com/joakim077/Springboot-BankApp.git')
+                codeCheckout('DevOps', 'https://github.com/Danish-0710/Springboot-Bank-App.git')
             }
         }
         stage('build') {
