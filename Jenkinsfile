@@ -1,29 +1,29 @@
-@Library("shared-library@DevOps") _
-
-pipeline {
-    agent { label 'dev-server' }
-
-    stages {
-        stage("Code clone") {
-            steps {
+@Library('Shared')_
+pipeline{
+    agent { label 'dev-server'}
+    
+    stages{
+        stage("Code clone"){
+            steps{
                 sh "whoami"
-                // Call the cloneRepo method
-                cloneRepo("https://github.com/Danish-0710/Springboot-Bank-App.git", "DevOps")
+            clone("https://github.com/Danish-0710/Springboot-Bank-App.git","DevOps")
             }
         }
-
-        stage("Code Build") {
-            steps {
-                // Call the dockerBuild method
-                dockerBuild("springboot-app", "latest", "dockerhubuser")
+        stage("Code Build"){
+            steps{
+            dockerbuild("bank-app","latest")
             }
         }
-
-        stage("Push to DockerHub") {
-            steps {
-                // Call the dockerPush method
-                dockerPush("springboot-app", "latest", "dockerhubuser")
+        stage("Push to DockerHub"){
+            steps{
+                dockerpush("dockerHubCreds","bank-app","latest")
             }
         }
+        stage("Deploy"){
+            steps{
+                deploy()
+            }
+        }
+        
     }
 }
